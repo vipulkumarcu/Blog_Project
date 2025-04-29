@@ -21,17 +21,16 @@ class AuthService {
 
       if ( response )
       {
-        return {
-          status: "success",
-          message: "User account created successfully.",
-        }
+        return true;
       }
-
     }
 
     catch ( error )
     {
-      throw new Error ( error.message || "Signup failed." );
+      console.log ( error.message || "Signup failed." );
+      return {
+        status: false
+      };
     }
   }
 
@@ -39,21 +38,24 @@ class AuthService {
   {
     try
     {
-      const response = await this.account.createEmailPasswordSession ( email, password );
+      const session = await this.account.createEmailPasswordSession ( email, password );
 
-      if ( response )
-      {
-        return {
-          status: "success",
-          message: "User login successful.",
+      return {
+        status: true,
+        data: {
+          sessionId: session?.$id,
+          userId: session?.userId
         }
-      }
+      };
 
     }
 
     catch ( error )
     {
-      throw new Error ( error.message || "Login failed." );
+      console.log ( error.message || "Signup failed." );
+      return {
+        status: false
+      };
     }
   }
 
@@ -63,34 +65,21 @@ class AuthService {
     {
       if ( logOutFromAllDevices )
       {
-        const response = await this.account.deleteSessions ();
-
-        if ( response )
-        {
-          return {
-            status: "success",
-            message: "You have been logged out of every device.",
-          }
-        }
+        await this.account.deleteSessions ();
       }
 
       else
       {
-        const response = await this.account.deleteSession ( sessionID );
-
-        if ( response )
-        {
-          return {
-            status: "success",
-            message: "You have been logged out successfully.",
-          }
-        }
+        await this.account.deleteSession ( sessionID );
       }
+
+      return true;
     }
 
     catch ( error )
     {
-      throw new Error ( error.message || "Logout failed. Please try again." );
+      console.log ( error.message || "Logout failed. Please try again." );
+      return false;
     }
   }
 
@@ -100,13 +89,23 @@ class AuthService {
     {
       const response = await this.account.get ();
 
-      return !!response;
+      return {
+        status: true,
+        data: {
+          userId: response?.$id,
+          email: response?.email,
+          name: response?.name,
+          isEmailVerified: response?.emailVerification,
+        }
+      };
     }
 
     catch ( error )
     {
-      console.error ( "Error getting user status:", error );
-      return false;
+      console.log ( error.message || "Error getting user status." );
+      return {
+        status: false
+      };
     }
   }
 
