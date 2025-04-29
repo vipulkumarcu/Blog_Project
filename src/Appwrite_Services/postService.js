@@ -1,5 +1,5 @@
 import { Client, Databases, Query  } from "appwrite";
-import { environmentVariables } from "../Environment_Variables/environmentVariables";
+import environmentVariables from "../Environment_Variables/environmentVariables";
 
 const { appwriteEndpointUrl, appwriteProjectId, appwriteDatabaseId, appwriteCollectionId } = environmentVariables;
 
