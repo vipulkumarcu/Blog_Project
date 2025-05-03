@@ -1,0 +1,41 @@
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { resetMessage } from "../../Features/messageSlice";
+
+function Alert ()
+{
+  const dispatch = useDispatch ();
+
+  const { display, type, message } = useSelector ( ( state ) => state.message );
+
+  useEffect (
+    () => {
+      let timer;
+
+      if ( display )
+      {
+        timer = setTimeout (
+          () => {
+            dispatch ( resetMessage () );
+          }, 3000
+        );
+      }
+
+      return () => {
+        clearTimeout ( timer );
+      };
+    }, [ display, dispatch ]
+  );
+
+  if ( !display ) return null;
+
+  const messageType = type === "success" ? "bg-green-600" : "bg-red-600";
+
+  return (
+    <div className = { `w-full ${ messageType } text-white text-center p-3 text-3xl`} >
+      { message }
+    </div>
+  );
+}
+
+export default Alert;

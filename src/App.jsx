@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Outlet } from "react-router-dom";
-import Header from "./Components/Header/Header.jsx";
-import Footer from "./Components/Footer/Footer.jsx";
+import { Header, Footer, Alert } from "./Components/index.js";
 import authService from "./Appwrite_Services/authService.js";
 import { login, logout } from "./Features/authSlice.js";
 function App ()
@@ -38,6 +37,7 @@ function App ()
         <div className = "w-full block" >
 
           <header>
+            <Alert />
             <Header />
           </header>
 

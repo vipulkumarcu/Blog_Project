@@ -13,7 +13,7 @@ class AuthService {
     this.account = new Account ( this.client );
   }
 
-  async userSignup ( { email, password, name } )
+  async userSignup ( email, password, name )
   {
     try
     {
@@ -34,7 +34,7 @@ class AuthService {
     }
   }
 
-  async userLogin ( { email, password } )
+  async userLogin ( email, password )
   {
     try
     {
@@ -59,7 +59,7 @@ class AuthService {
     }
   }
 
-  async userLogout ( { logOutFromAllDevices, sessionID } )
+  async userLogout ( logOutFromAllDevices, sessionID )
   {
     try
     {
