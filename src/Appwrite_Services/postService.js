@@ -13,7 +13,7 @@ class PostService
     this.databases = new Databases ( this.client );
   }
 
-  async createPost ( { title, content, slug, featuredImage, status, userId } )
+  async createPost ( title, content, slug, featuredImage, status, userId )
   {
     try
     {
@@ -40,7 +40,7 @@ class PostService
     }
   }
 
-  async updatePost ( slug, { title, content, featuredImage, status } )
+  async updatePost ( slug, title, content, featuredImage, status )
   {
     try
     {
