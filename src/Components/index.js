@@ -6,8 +6,10 @@ import Footer from "./Footer/Footer";
 import Header from "./Header/Header";
 import LogoutButton from "./Header/LogoutButton";
 import InputBox from "./InputBox/InputBox";
+import Login from "./Login/Login";
 import Logo from "./Logo/Logo";
 import SelectBox from "./SelectBox/SelectBox";
+import Signup from "./Signup/Signup";
 
 export {
   Alert,
@@ -18,6 +20,8 @@ export {
   Header,
   LogoutButton,
   InputBox,
+  Login,
   Logo,
   SelectBox,
+  Signup,
 }
