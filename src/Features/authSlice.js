@@ -13,6 +13,7 @@ const authSlice = createSlice (
     initialState: {
       loginStatus: initialLoginStatus,
       userData: initialUserData,
+      // userData: { sessionId , userId, email, name, isEmailVerified }
     },
 
     reducers: {

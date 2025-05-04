@@ -28,9 +28,7 @@ class AuthService {
     catch ( error )
     {
       console.log ( error.message || "Signup failed." );
-      return {
-        status: false
-      };
+      return false;
     }
   }
 

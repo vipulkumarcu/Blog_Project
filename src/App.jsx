@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Outlet } from "react-router-dom";
-import { Header, Footer, Alert } from "./Components/index.js";
+import { Header, Footer, Alert, Loader } from "./Components/index.js";
 import authService from "./Appwrite_Services/authService.js";
 import postService from "./Appwrite_Services/postService.js";
 import { login, logout } from "./Features/authSlice.js";
@@ -9,7 +9,7 @@ import { setPosts } from "./Features/postSlice.js";
 import { setMessage } from "./Features/messageSlice.js";
 function App ()
 {
-  const [ loading, setloading ] = useState ( true );
+  const [ loading, setloading ] = useState ( false );
 
   const dispatch = useDispatch ();
 
@@ -24,7 +24,7 @@ function App ()
       {
         try
         {
-          const data = await authService.getUserStatus();
+          const data = await authService.getUserStatus ();
 
           if ( data.status )
           {
@@ -46,14 +46,14 @@ function App ()
 
           else
            {
-            dispatch ( logout() );
+            dispatch ( logout () );
           }
         }
 
         catch ( error )
         {
           console.error ( "Initialization failed", error );
-          dispatch ( logout() );
+          dispatch ( logout () );
           messageHandler ( "error", "Something went wrong during initialization." );
         }
 
@@ -68,30 +68,29 @@ function App ()
   );
 
 
-  return !loading
-    ? (
-      <div className = "min-h-screen flex flex-wrap content-between bg-gray-400" >
+  return  (
+    <div className = "min-h-screen flex flex-wrap content-between bg-gray-400" >
 
-        <div className = "w-full block" >
+      <div className = "w-full block" >
 
-          <header>
-            <Alert />
-            <Header />
-          </header>
+        <header>
+          <Alert />
+          <Header />
+        </header>
 
-          <main>
-            <Outlet />
-          </main>
+        <main>
+          { loading && <Loader /> }
+          { !loading && <Outlet /> }
+        </main>
 
-          <footer>
-            <Footer />
-          </footer>
-
-        </div>
+        <footer>
+          <Footer />
+        </footer>
 
       </div>
-    )
-    : null
+
+    </div>
+  );
 }
 
 export default App;

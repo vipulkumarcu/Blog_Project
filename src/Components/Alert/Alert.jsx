@@ -29,10 +29,33 @@ function Alert ()
 
   if ( !display ) return null;
 
-  const messageType = type === "success" ? "bg-green-600" : "bg-red-600";
+  let messageType = "";
+
+  switch ( type )
+  {
+    case "success":
+      messageType = "bg-green-600";
+      break;
+
+    case "error":
+      messageType = "bg-red-600";
+      break;
+
+    case "warning":
+      messageType = "bg-yellow-600";
+      break;
+
+    case "info":
+      messageType = "bg-blue-600";
+      break;
+
+    default:
+      messageType = "bg-gray-600";
+      break;
+  }
 
   return (
-    <div className = { `w-full ${ messageType } text-white text-center p-3 text-3xl`} >
+    <div className = { `w-full ${ messageType } text-white text-center p-3 text-2xl`} >
       { message }
     </div>
   );

@@ -31,11 +31,9 @@ function Login ()
           };
 
           dispatch ( login ( combinedUserData ) );
+          dispatch ( setMessage ( "success", "Logged in successfully." ) );
+          navigate ( "/" );
         }
-
-
-        dispatch ( setMessage ( "success", "Logged in successfully." ) );
-        navigate ( "/" );
       }
 
       else
@@ -46,7 +44,7 @@ function Login ()
 
     catch ( error )
     {
-      console.log ( error.message || "Login failed." );
+      dispatch ( setMessage ( "error", error.message ||"Login failed." ) );
     }
   }
 
