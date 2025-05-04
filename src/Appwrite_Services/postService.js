@@ -40,7 +40,7 @@ class PostService
     }
   }
 
-  async updatePost ( slug, title, content, featuredImage, status )
+  async updatePost ( slug, { title, content, featuredImage, status } )
   {
     try
     {
