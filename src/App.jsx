@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Outlet } from "react-router-dom";
 import { Header, Footer, Alert, Loader } from "./Components/index.js";
 import authService from "./Appwrite_Services/authService.js";
@@ -73,14 +73,6 @@ function App ()
       init ();
     }, []
   );
-
-  const reduxdata = useSelector ( ( state ) => state.auth.userData );
-
-  console.log ( "reduxdata", reduxdata );
-
-  const localStorageData = JSON.parse ( localStorage.getItem ( "User Data" ) );
-
-  console.log ( "localStorageData", localStorageData );
 
   return  (
     <div className = "min-h-screen flex flex-wrap content-between bg-gray-400" >

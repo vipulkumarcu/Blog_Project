@@ -20,12 +20,24 @@ function Signup ()
 
       if ( response )
       {
-        dispatch ( setMessage ( "success", "Signup successful." ) );
+        dispatch ( setMessage (
+            {
+              type: "success",
+              message: "Sign up successful."
+            }
+          )
+        );
 
         setTimeout (
           () => {
-            dispatch ( setMessage ( "info", "You can now login into your account." ) );
-          }, 4000
+            dispatch ( setMessage (
+              {
+                type: "success",
+                message: "You can now log in into your account."
+              }
+            )
+          );
+          }, 3000
         );
 
         navigate ( "/login" );
@@ -34,7 +46,13 @@ function Signup ()
 
     catch ( error )
     {
-      dispatch ( setMessage ( "error", error.message ||"Signup failed." ) );
+      dispatch ( setMessage (
+        {
+          type: "error",
+          message: error.message || "Sign up failed."
+        }
+      )
+    );
     }
   }
 

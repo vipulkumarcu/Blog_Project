@@ -3,6 +3,7 @@ import AuthLayout from "./AuthLayout/AuthLayout";
 import Button from "./Button/Button";
 import Card from "./Card/Card";
 import Container from "./Container/Container";
+import EmptyState from "./EmptyState/EmptyState";
 import Footer from "./Footer/Footer";
 import Header from "./Header/Header";
 import LogoutButton from "./Header/LogoutButton";
@@ -21,6 +22,7 @@ export {
   Button,
   Card,
   Container,
+  EmptyState,
   Footer,
   Header,
   LogoutButton,

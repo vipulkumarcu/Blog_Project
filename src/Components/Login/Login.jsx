@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import authService from "../../Appwrite_Services/authService";
@@ -31,7 +31,13 @@ function Login ()
           };
 
           dispatch ( login ( combinedUserData ) );
-          dispatch ( setMessage ( "success", "Logged in successfully." ) );
+          dispatch ( setMessage (
+              {
+                type: "success",
+                message: "Log in successful."
+              }
+            )
+          );
           navigate ( "/" );
         }
 
@@ -39,18 +45,27 @@ function Login ()
 
       else
       {
-        dispatch ( setMessage ( "error", "Login failed." ) );
+        dispatch ( setMessage (
+            {
+              type: "error",
+              message: "Failed. Unable to log out."
+            }
+          )
+        );
       }
     }
 
     catch ( error )
     {
-      dispatch ( setMessage ( "error", error.message ||"Login failed." ) );
+      dispatch ( setMessage (
+        {
+          type: "error",
+          message: error.message || "Log in failed."
+        }
+      )
+    );
     }
   }
-
-  const userData = useSelector ( ( state ) => state.auth.userData );
-  console.log ( userData );
 
 
   return (

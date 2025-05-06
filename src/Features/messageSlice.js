@@ -12,7 +12,7 @@ const messageSlice = createSlice (
 
     reducers: {
       setMessage: ( state, action ) => {
-        const [ type, message ] = action.payload;
+        const { type, message } = action.payload;
         state.display = true;
         state.type = type;
         state.message = message;
