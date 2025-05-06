@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Loader } from "../index";
 
-function AuthLayout ( { children, authentication = true } )
+function AuthLayout ( { children, authentication } )
 {
   const navigate = useNavigate ();
 

@@ -41,7 +41,7 @@ function Signup ()
   return (
     <div className = "flex items-center justify-center w-full" >
 
-      <div className = "mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10" >
+      <div className = "mx-auto w-full max-w-lg bg-gray-300 rounded-xl p-10 border border-black/10" >
 
         <div className = "mb-2 flex justify-center" >
           <span className = "inline-block w-full max-w-[100px]" >
@@ -59,7 +59,7 @@ function Signup ()
               to = "/login"
               className = "font-medium text-primary transition-all duration-200 hover:underline"
           >
-            Register me
+            Sign in
           </Link>
         </p>
 
@@ -115,9 +115,9 @@ function Signup ()
             />
             <Button
               type = "submit"
-              className = "w-full"
+              className = "w-full rounded-lg"
             >
-              Sign up
+              Register Me
             </Button>
           </div>
 

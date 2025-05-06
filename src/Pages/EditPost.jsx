@@ -5,13 +5,9 @@ import { useParams } from "react-router-dom";
 
 function EditPost ()
 {
-  const param = useParams ();
+  const { id } = useParams ();
 
-  const post = useSelector (
-    ( state ) => state.post.posts.find (
-      ( post ) => post.id === param.postId
-    )
-  );
+  const post = useSelector ( ( state ) => state.post.posts.find ( ( post ) => post.id === id ) );
 
   return (
     <div className = "py-8" >

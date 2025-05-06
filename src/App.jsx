@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 import { Header, Footer, Alert, Loader } from "./Components/index.js";
 import authService from "./Appwrite_Services/authService.js";
@@ -24,11 +24,18 @@ function App ()
       {
         try
         {
-          const data = await authService.getUserStatus ();
+          const userStatus  = await authService.getUserStatus ();
 
-          if ( data.status )
+          if ( userStatus.status )
           {
-            dispatch ( login ( data ) );
+            const storedUserData  = JSON.parse ( localStorage.getItem ( "User Data" ) );
+
+            const mergedUserData = {
+              ...userStatus.data,
+              sessionId: storedUserData?.sessionId || null,
+            };
+
+            dispatch ( login ( mergedUserData ) );
 
             const posts = await postService.getAllPosts ();
 
@@ -67,6 +74,13 @@ function App ()
     }, []
   );
 
+  const reduxdata = useSelector ( ( state ) => state.auth.userData );
+
+  console.log ( "reduxdata", reduxdata );
+
+  const localStorageData = JSON.parse ( localStorage.getItem ( "User Data" ) );
+
+  console.log ( "localStorageData", localStorageData );
 
   return  (
     <div className = "min-h-screen flex flex-wrap content-between bg-gray-400" >

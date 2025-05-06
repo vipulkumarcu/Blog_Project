@@ -11,19 +11,23 @@ function AllPosts ()
 
       <Container>
 
-        <div className = "flex flex-wrap" >
-
-          {
-            posts.map (
-              ( post ) => (
-                <div key = { post.id } className = "p-2 w-1/4" >
-                    <Card { ...post } />
-                </div>
-              )
+        {
+          posts.length === 0
+          ? ( <p className = "text-center w-full text-4xl text-gray-700" > No posts available. </p> )
+          : (
+              <div className = "flex flex-wrap" >
+                {
+                  posts.map (
+                    ( post ) => (
+                      <div key = { post.$id } className = "p-2 w-full sm:w-1/2 md:w-1/3 lg:w-1/4" >
+                          <Card { ...post } />
+                      </div>
+                    )
+                  )
+                }
+              </div>
             )
-          }
-
-        </div>
+        }
 
       </Container>
 

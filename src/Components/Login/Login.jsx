@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import authService from "../../Appwrite_Services/authService";
@@ -34,6 +34,7 @@ function Login ()
           dispatch ( setMessage ( "success", "Logged in successfully." ) );
           navigate ( "/" );
         }
+
       }
 
       else
@@ -48,10 +49,14 @@ function Login ()
     }
   }
 
+  const userData = useSelector ( ( state ) => state.auth.userData );
+  console.log ( userData );
+
+
   return (
     <div className = "flex items-center justify-center w-full" >
 
-      <div className = "mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10" >
+      <div className = "mx-auto w-full max-w-lg bg-gray-300 rounded-xl p-10 border border-black/10" >
 
         <div className = "mb-2 flex justify-center" >
           <span className = "inline-block w-full max-w-[100px]" >
@@ -69,7 +74,7 @@ function Login ()
               to = "/signup"
               className = "font-medium text-primary transition-all duration-200 hover:underline"
           >
-            Sign Up
+            Register
           </Link>
         </p>
 
@@ -110,7 +115,7 @@ function Login ()
             />
             <Button
               type = "submit"
-              className = "w-full"
+              className = "w-full rounded-lg"
             >
               Sign in
             </Button>

@@ -5,8 +5,9 @@ import { Container, Card } from "../Components/index";
 function Home ()
 {
   const posts = useSelector ( ( state ) => state.post.posts );
+  const isLoggedIn = useSelector ( ( state) => state.auth.status );
 
-  if ( posts.length === 0 )
+  if ( posts.length === 0 && !isLoggedIn )
   {
     return (
       <div className = "w-full py-8 mt-4 text-center" >
@@ -20,7 +21,7 @@ function Home ()
               <h1
                 className = "text-2xl font-bold hover:text-gray-500"
               >
-                Login to read posts
+                { isLoggedIn ? "No posts available." : "Login to read posts" }
               </h1>
 
             </div>
@@ -44,7 +45,7 @@ function Home ()
             posts.map (
               ( post ) => (
                 <div key = { post.id } className = "p-2 w-1/4" >
-                  <Card post = { post } />
+                  <Card { ...post } />
                 </div>
               )
             )
