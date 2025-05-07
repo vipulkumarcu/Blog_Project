@@ -10,7 +10,7 @@ function AllPosts ()
   const isLoggedIn = useSelector ( ( state) => state.auth.loginStatus );
 
   return (
-    <div className = "w-full py-16 text-center bg-gray-400 rounded-xl shadow-lg" >
+    <div className = "w-full p-12 text-center bg-gray-400 rounded-xl shadow-lg" >
 
       <Container>
         {

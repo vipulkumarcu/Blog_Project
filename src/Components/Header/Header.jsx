@@ -47,7 +47,7 @@ function Header ()
 
           <div className = "mr-4" >
             <Link to="/">
-              <Logo width = "50px" />
+              <Logo className = "shadow-3xl hover:cursor-pointer hover:mt-3 duration-200 transition-all" width = "50px" />
             </Link>
           </div>
 
@@ -60,7 +60,7 @@ function Header ()
                     <li key = { item.name }>
                       <button
                         onClick = { () => navigate ( item.path ) }
-                        className = "inline-bock px-6 py-2 duration-200 mr-2 hover:bg-blue-100 rounded-full text-xl"
+                        className = "inline-block px-6 py-2 duration-300 mr-2 hover:bg-blue-300 hover:cursor-pointer hover:shadow-md rounded-full text-xl"
                       >
                         { item.name }
                       </button>

@@ -22,7 +22,7 @@ class StorageService
 
       return {
         status: true,
-        data: {
+        fileData: {
           fileId: response?.$id,
           name: response?.name,
         },
@@ -33,7 +33,8 @@ class StorageService
     {
       console.log ( error.message || "Failed to upload File." );
       return {
-        status: false
+        status: false,
+        fileData: null,
       }
     }
   }

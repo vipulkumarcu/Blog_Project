@@ -19,13 +19,13 @@ const postSlice = createSlice (
 
       updatePost: ( state, action ) => {
         state.posts = state.posts.map (
-          ( post ) => post.id === action.payload.id ? action.payload : post
+          ( post ) => post.$id === action.payload.$id ? action.payload : post
         );
       },
 
       deletePost: ( state, action ) => {
         state.posts = state.posts.filter (
-          ( post ) => post.id !== action.payload
+          ( post ) => post.$id !== action.payload
         );
       }
     }
