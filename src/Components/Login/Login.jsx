@@ -34,7 +34,8 @@ function Login ()
           dispatch ( setMessage (
               {
                 type: "success",
-                message: "Log in successful."
+                message: "Log in successful.",
+                duration: 3000,
               }
             )
           );
@@ -48,7 +49,8 @@ function Login ()
         dispatch ( setMessage (
             {
               type: "error",
-              message: "Failed. Unable to log out."
+              message: "Failed. Unable to log out.",
+              duration: 3000,
             }
           )
         );
@@ -60,7 +62,8 @@ function Login ()
       dispatch ( setMessage (
         {
           type: "error",
-          message: error.message || "Log in failed."
+          message: error.message || "Log in failed.",
+          duration: 3000,
         }
       )
     );

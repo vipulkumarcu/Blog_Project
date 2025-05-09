@@ -238,7 +238,7 @@ function PostForm ( {  post } )
         <Button
           type = "submit"
           bgColor = { post ? "bg-green-500" : undefined }
-          className = "w-full"
+          className = "w-full rounded-xl"
         >
           { post ? "Update" : "Submit" }
         </Button>

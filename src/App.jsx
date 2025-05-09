@@ -9,68 +9,80 @@ import { setPosts } from "./Features/postSlice.js";
 import { setMessage } from "./Features/messageSlice.js";
 function App ()
 {
-  const [ loading, setloading ] = useState ( false );
+  const [ loading, setLoading ] = useState ( false );
 
   const dispatch = useDispatch ();
 
-  function messageHandler ( type, message )
+  function messageHandler ( type, message, duration )
   {
-    dispatch ( setMessage ( type, message ) );
+    dispatch ( setMessage ( { type, message, duration } ) );
   }
+
+  // Fetching and dispatching posts
+  async function loadPosts ()
+  {
+    try
+    {
+      const posts = await postService.getAllPosts ();
+
+      if  (posts.length > 0 )
+      {
+        dispatch ( setPosts ( posts ) );
+
+        messageHandler ( "success", "Posts fetched successfully.", 5000 );
+      }
+
+      else
+      {
+        messageHandler ( "error", "No posts found.", 5000 );
+      }
+    }
+
+    catch ( error )
+    {
+      messageHandler ( "error", error.message || "Failed to fetch posts.", 5000 );
+    }
+  };
+
+  // Authenticating user and initializing app state
+  async function initializeApp ()
+  {
+    try {
+      const userStatus = await authService.getUserStatus ();
+
+      if ( !userStatus.status )
+      {
+        dispatch ( logout () );
+        return;
+      }
+
+      const sessionId = await authService.getUserSession ();
+
+      const userData = {
+        ...userStatus.data,
+        sessionId: sessionId || null,
+      };
+
+      dispatch ( login ( userData ) );
+
+      await loadPosts (); // loading posts after login
+    }
+
+    catch ( error )
+    {
+      dispatch ( logout () );
+      messageHandler ( "error", error.message || "Something went wrong during initialization.", 3000 );
+    }
+
+    finally
+    {
+      setLoading ( false );
+    }
+  };
 
   useEffect (
     () => {
-      async function init ()
-      {
-        try
-        {
-          const userStatus  = await authService.getUserStatus ();
-
-          if ( userStatus.status )
-          {
-            const storedUserData  = JSON.parse ( localStorage.getItem ( "User Data" ) );
-
-            const mergedUserData = {
-              ...userStatus.data,
-              sessionId: storedUserData?.sessionId || null,
-            };
-
-            dispatch ( login ( mergedUserData ) );
-
-            const posts = await postService.getAllPosts ();
-
-            if ( posts.length > 0 )
-            {
-              dispatch ( setPosts ( posts ) );
-              messageHandler ( "success", "Posts fetched successfully." );
-            }
-
-            else
-            {
-              messageHandler ( "error", "No posts found." );
-            }
-          }
-
-          else
-           {
-            dispatch ( logout () );
-          }
-        }
-
-        catch ( error )
-        {
-          console.error ( "Initialization failed", error );
-          dispatch ( logout () );
-          messageHandler ( "error", "Something went wrong during initialization." );
-        }
-
-        finally
-        {
-          setloading ( false );
-        }
-      }
-
-      init ();
+      initializeApp();
     }, []
   );
 
@@ -85,8 +97,7 @@ function App ()
         </header>
 
         <main>
-          { loading && <Loader /> }
-          { !loading && <Outlet /> }
+          { loading ? <Loader /> : <Outlet /> }
         </main>
 
         <footer>

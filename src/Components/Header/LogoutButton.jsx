@@ -21,7 +21,8 @@ function LogoutButton ()
             dispatch ( setMessage (
                 {
                   type: "success",
-                  message: "Logged out successfully."
+                  message: "Logged out successfully.",
+                  duration: 3000,
                 }
               )
             );
@@ -32,7 +33,8 @@ function LogoutButton ()
             dispatch ( setMessage (
                 {
                   type: "error",
-                  message: "Logout failed. Please try again."
+                  message: "Logout failed. Please try again.",
+                  duration: 3000,
                 }
               )
             );

@@ -6,7 +6,7 @@ function Alert ()
 {
   const dispatch = useDispatch ();
 
-  const { display, type, message } = useSelector ( ( state ) => state.message );
+  const { display, type, message, duration } = useSelector ( ( state ) => state.message );
 
   useEffect (
     () => {
@@ -17,12 +17,12 @@ function Alert ()
         timer = setTimeout (
           () => {
             dispatch ( resetMessage () );
-          }, 3000
+          }, duration
         );
       }
 
       return () => clearTimeout ( timer );
-    }, [ display, dispatch ]
+    }, [ display, dispatch, duration ]
   );
 
   if ( !display ) return null;

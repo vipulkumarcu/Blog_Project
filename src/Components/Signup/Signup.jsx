@@ -23,21 +23,32 @@ function Signup ()
         dispatch ( setMessage (
             {
               type: "success",
-              message: "Sign up successful."
+              message: "Sign up successful.",
+              duration: 3000,
             }
           )
         );
 
-        setTimeout (
-          () => {
-            dispatch ( setMessage (
-              {
-                type: "success",
-                message: "You can now log in into your account."
-              }
-            )
-          );
-          }, 3000
+        // setTimeout (
+        //   () => {
+        //     dispatch ( setMessage (
+        //       {
+        //         type: "success",
+        //         message: "You can now log in into your account.",
+        //         duration: 3000,
+        //       }
+        //     )
+        //   );
+        //   }, 3000
+        // );
+
+        dispatch ( setMessage (
+            {
+              type: "success",
+              message: "You can now log in into your account.",
+              duration: 4000,
+            }
+          )
         );
 
         navigate ( "/login" );
@@ -49,7 +60,8 @@ function Signup ()
       dispatch ( setMessage (
         {
           type: "error",
-          message: error.message || "Sign up failed."
+          message: error.message || "Sign up failed.",
+          duration: 3000,
         }
       )
     );

@@ -107,6 +107,21 @@ class AuthService {
     }
   }
 
+  async getUserSession ()
+  {
+    try
+    {
+      const session = await this.account.getSession ( 'current' );
+      return session.$id;
+    }
+
+    catch ( error )
+    {
+      console.log ( error.message || "Failed to get session:" );
+      return null;
+    }
+  }
+
 }
 
 const authService = new AuthService ();
